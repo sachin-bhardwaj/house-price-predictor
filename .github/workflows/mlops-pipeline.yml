@@ -105,7 +105,7 @@ jobs:
           docker stop mlflow-server || true
           docker rm mlflow-server || true
 
-  Build-&-publish-image:
+  Build-and-publish-image:
     needs: model-training
     runs-on: ubuntu-latest
     steps:
