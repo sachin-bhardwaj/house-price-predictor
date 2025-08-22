@@ -110,6 +110,10 @@ jobs:
     needs: model-training
     runs-on: ubuntu-latest
     steps:
+    
+      - name: Checkout code
+        uses: actions/checkout@v5
+
       - name : download trained model
         uses: actions/download-artifact@v5
         with:
