@@ -110,7 +110,7 @@ jobs:
     needs: model-training
     runs-on: ubuntu-latest
     steps:
-    
+
       - name: Checkout code
         uses: actions/checkout@v5
 
@@ -133,7 +133,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: setup docker buildx
-        uses: docker/setup-buildx-actions@v3
+        uses: docker/setup-buildx-action@v3
 
       -  name: Build and push
          uses: docker/build-push-action@v6
