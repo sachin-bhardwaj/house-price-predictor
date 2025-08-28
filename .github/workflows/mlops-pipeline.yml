@@ -75,11 +75,24 @@ jobs:
       - name: Download processed data artifact
         uses: actions/download-artifact@v5
 
+      - name: Setup mysql container
+        run: | 
+          docker run -d \
+            --name mlflow-mysql \
+            -e MYSQL_ROOT_PASSWORD=rootpassword \
+            -e MYSQL_DATABASE=mlflow \
+            -e MYSQL_USER=mlflow \
+            -e MYSQL_PASSWORD=mlflowpass \
+            -p 3306:3306 \
+            mysql:8
+
       - name: Setup mlflow
         run: | 
           docker pull ghcr.io/mlflow/mlflow:latest
           docker run -d -p 5555:5000 --name mlflow-server ghcr.io/mlflow/mlflow:latest \
-          mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /tmp/mlruns
+          mlflow server \
+           --backend-store-uri mysql+pymysql://mlflow:mlflowpass@host.docker.internal:3306/mlflow \
+           --host 0.0.0.0 --default-artifact-root /tmp/mlruns
           sleep 5
           docker ps -a
           docker exec mlflow-server mlflow --version
