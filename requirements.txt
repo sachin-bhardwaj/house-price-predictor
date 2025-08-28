@@ -20,6 +20,7 @@ seaborn==0.12.2        # High-level interface for drawing attractive and informa
 # ---------------------------------------------
 mlflow         # End-to-end ML lifecycle tracking, including experiment tracking, model packaging, and deployment
 
+pymysql
 # ---------------------------------------------
 # ✅ TESTING
 # ---------------------------------------------
