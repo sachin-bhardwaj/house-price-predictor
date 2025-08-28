@@ -95,7 +95,9 @@ jobs:
            --host 0.0.0.0 --default-artifact-root /tmp/mlruns
           sleep 5
           docker ps -a
+          docker logs mlflow-server
           docker exec mlflow-server mlflow --version
+
 
       - name: wait for mlflow to start
         run: |
