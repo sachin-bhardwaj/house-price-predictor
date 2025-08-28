@@ -89,6 +89,7 @@ jobs:
       - name: Setup mlflow
         run: | 
           docker pull ghcr.io/mlflow/mlflow:latest
+          pip install pymysql
           docker run -d -p 5555:5000 --name mlflow-server ghcr.io/mlflow/mlflow:latest \
           mlflow server \
            --backend-store-uri mysql+pymysql://mlflow:mlflowpass@host.docker.internal:3306/mlflow \
